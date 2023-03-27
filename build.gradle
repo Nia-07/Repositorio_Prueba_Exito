@@ -1,0 +1,94 @@
+plugins {
+    //id "net.serenity-bdd.serenity-gradle-plugin" version "3.6.7"
+    id "net.serenity-bdd.serenity-gradle-plugin" version "3.4.2"
+    id 'java'
+    id 'eclipse'
+    id 'idea'
+}
+
+defaultTasks 'clean','test','aggregate'
+
+repositories {
+    mavenCentral()
+    mavenLocal()
+}
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+/*ext {
+    slf4jVersion = '1.7.7'
+    serenityCoreVersion = '3.6.21'
+    junitVersion = '5.8.2'
+    assertJVersion = '3.22.0'
+    logbackVersion = '1.2.10'
+}*/
+
+ext {
+    slf4jVersion = '1.7.0'
+    serenityCoreVersion = '3.6.21'
+    junitVersion = '5.8.2'
+    assertJVersion = '3.23.1'
+    logbackVersion = '1.2.10'
+}
+
+dependencies {
+    //implementation 'net.serenity-bdd:serenity-core:3.6.21'
+    implementation 'net.serenity-bdd:serenity-screenplay:3.6.21'
+    implementation 'net.serenity-bdd:serenity-core:3.6.21'
+    implementation "net.serenity-bdd:serenity-screenplay-webdriver:3.6.21"
+    implementation "net.serenity-bdd:serenity-cucumber:3.6.21"
+    //implementation 'com.alexitc:scala-js-chrome_sjs1_2.13:0.9.0'
+    testImplementation "net.serenity-bdd:serenity-core:${serenityCoreVersion}",
+            "net.serenity-bdd:serenity-junit5:${serenityCoreVersion}",
+            "net.serenity-bdd:serenity-screenplay:${serenityCoreVersion}",
+            "net.serenity-bdd:serenity-ensure:${serenityCoreVersion}",
+            "net.serenity-bdd:serenity-screenplay-webdriver:${serenityCoreVersion}",
+            "net.serenity-bdd:serenity-cucumber:${serenityCoreVersion}",
+            "org.junit.jupiter:junit-jupiter-api:${junitVersion}",
+            "org.assertj:assertj-core:${assertJVersion}",
+            "ch.qos.logback:logback-classic:${logbackVersion}",
+            'org.seleniumhq.selenium:selenium-java:4.8.1',
+            testImplementation("io.github.bonigarcia:webdrivermanager:5.3.2")
+
+    testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:${junitVersion}"
+}
+
+test {
+    useJUnitPlatform()
+}
+
+test {
+
+    testLogging.showStandardStreams = true
+    systemProperties System.getProperties()
+}
+
+serenity {
+    // Specify the root package of any JUnit acceptance tests to appear in the Serenity report
+    testRoot = "runner.RunTest"
+    // Specify the root directory of any Cucumber feature files
+    requirementsDir = "src/test/resources/feature"
+
+}
+
+configurations {
+    cucumberRuntime {
+        extendsFrom testImplementation
+    }
+}
+
+tasks {
+    dependsOn assemble, testClasses
+    doLast {
+        javaexec {
+            main = "io.cucumber.core.cli.Main"
+            classpath = configurations.cucumberRuntime + sourceSets.main.output + sourceSets.test.output
+            args = ['--plugin', 'pretty', '--glue', 'runner.RunTest', 'src/test/resources/feature/']
+        }
+    }
+}
+
+gradle.startParameter.continueOnFailure = true
+
+test.finalizedBy(aggregate)

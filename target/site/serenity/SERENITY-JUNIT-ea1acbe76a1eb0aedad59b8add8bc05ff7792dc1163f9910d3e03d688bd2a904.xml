@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><testsuite errors="1" failures="0" name="Realizar compras de productos" skipped="0" tests="1" time="22.39" timestamp="2023-03-27 01:25:52"><testcase name="Agregar productos al carrito de compras"><error message="Expected condition failed: waiting for alert to be present (tried for 10 second(s) with 500 milliseconds interval)&#10;Build info: version: '4.8.1', revision: '8ebccac989'&#10;System info: os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '11.0.16.1'&#10;Driver info: net.thucydides.core.webdriver.DevToolsWebDriverFacade&#10;Build info: version: '4.8.1', revision: '8ebccac989'&#10;System info: os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '11.0.16.1'&#10;Driver info: driver.version: unknown" type="org.openqa.selenium.TimeoutException">Expected condition failed: waiting for alert to be present (tried for 10 second(s) with 500 milliseconds interval)
+Build info: version: '4.8.1', revision: '8ebccac989'
+System info: os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '11.0.16.1'
+Driver info: net.thucydides.core.webdriver.DevToolsWebDriverFacade
+Build info: version: '4.8.1', revision: '8ebccac989'
+System info: os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '11.0.16.1'
+Driver info: driver.version: unknown</error><system-err>Expected condition failed: waiting for alert to be present (tried for 10 second(s) with 500 milliseconds interval)
+Build info: version: '4.8.1', revision: '8ebccac989'
+System info: os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '11.0.16.1'
+Driver info: net.thucydides.core.webdriver.DevToolsWebDriverFacade
+Build info: version: '4.8.1', revision: '8ebccac989'
+System info: os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '11.0.16.1'
+Driver info: driver.version: unknown&#13;
+stepDefinitions.productosExito.queUnNuevoClienteAccedeALaWebDeExito(productosExito.java:56)&#13;
+✽.que un nuevo cliente accede a la web de exito(file:///C:/Exito_Test/src/test/resources/feature/productosExito.feature:8)&#13;
+</system-err></testcase></testsuite>
